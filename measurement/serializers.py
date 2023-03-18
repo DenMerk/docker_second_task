@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, fields
 from rest_framework.renderers import JSONRenderer
 
 from measurement.models import Sensor, Measurement
@@ -10,19 +10,19 @@ from measurement.models import Sensor, Measurement
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ['id', 'name', 'description']
+        fields = '__all__'
 
 
 class MeasurementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Measurement
-        fields = ['id', 'temperature', 'created_at', 'sensor']
+        fields = ('id', 'temperature', 'created_at', 'sensor')
 
 
 class MeasurementDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Measurement
-        fields = ['temperature', 'created_at']
+        fields = ('temperature', 'created_at')
 
 
 class SensorDetailSerializer(serializers.ModelSerializer):
@@ -30,4 +30,4 @@ class SensorDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sensor
-        fields = ['id', 'name', 'description', 'measurements']
+        fields = ('id', 'name', 'description', 'measurements')
